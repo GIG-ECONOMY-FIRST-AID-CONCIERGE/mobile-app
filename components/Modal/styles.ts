@@ -12,7 +12,6 @@ const styles = StyleSheet.create({
   },
   modalView: {
     width: '90%',
-    padding: 28,
     backgroundColor: 'white',
     borderRadius: 20,
     shadowColor: '#000',
@@ -24,12 +23,19 @@ const styles = StyleSheet.create({
     shadowRadius: 3.84,
     elevation: 5,
   },
+  modalContent: {
+    padding: 28,
+  },
   modalTitle: {
     marginBottom: 4,
     textAlign: 'left',
     fontSize: 14,
     fontWeight: '500',
     color: '#787878'
+  },
+  actions: {
+    borderTopWidth: 1,
+    borderTopColor: '#D9D9D9'
   },
   modalSubtitle: {
     fontSize: 12,

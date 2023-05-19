@@ -16,7 +16,23 @@ const App = (): JSX.Element => {
     subtitle: '',
     title: '',
     visible: false,
+    actions: []
   });
+
+  const openModalDetails = useCallback(() => {
+
+  }, [modal]);
+
+  const closeModal = useCallback(() => {
+    setModal({
+      ...modal,
+      content: '',
+      subtitle: '',
+      title: '',
+      visible: false,
+      actions: []
+    });
+  }, []);
 
   const simulateAccident = useCallback(() => {
     setModal({
@@ -25,6 +41,18 @@ const App = (): JSX.Element => {
       subtitle: 'Tempo restante',
       title: 'Está tudo bem com você?',
       visible: true,
+      actions: [
+        {
+          label: "Sim, Preciso",
+          onPress: openModalDetails,
+          variant: 'confirm'
+        },
+        {
+          label: "Não, Obrigado",
+          onPress: closeModal,
+          variant: 'cancel'
+        },
+      ]
     });
   }, [modal]);
 

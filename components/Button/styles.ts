@@ -9,7 +9,6 @@ const styles = (props: any) => StyleSheet.create({
         paddingHorizontal: 32,
         borderRadius: 4,
         elevation: 3,
-        color: props.variant == 'confirm' ? '#1369E8' : '#F3485A',
         backgroundColor: '#fff',
     },
     buttonPrimary: {
@@ -26,7 +25,7 @@ const styles = (props: any) => StyleSheet.create({
         lineHeight: 21,
         fontWeight: 'bold',
         letterSpacing: 0.25,
-        color: 'white',
+        color: props.variant == 'confirm' ? '#1369E8' : props.variant == 'cancel' ? '#F3485A' : '#FFF',
     },
 });
 

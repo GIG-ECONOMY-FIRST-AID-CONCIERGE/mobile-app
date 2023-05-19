@@ -1,9 +1,9 @@
 import React from 'react';
 
-const Modal = (): JSX.Element => {
+const Modal = ({ title, subtitle, content, actions = [] }): JSX.Element => {
     return (
         <div>
-            teste
+            {title}
             <div>teste 2</div>
         </div>
     );

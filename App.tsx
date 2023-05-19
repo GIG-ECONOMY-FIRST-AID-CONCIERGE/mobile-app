@@ -10,7 +10,7 @@ import { Button } from './components/Button';
 import { Modal } from './components/Modal';
 
 const App = (): JSX.Element => {
-  const [modal, setModal] = useState({
+  const [modal, setModal]: any = useState({
     content: '',
     count: 10,
     subtitle: '',
@@ -20,7 +20,15 @@ const App = (): JSX.Element => {
   });
 
   const openModalDetails = useCallback(() => {
-
+    setModal({
+      ...modal,
+      count: 0,
+      content: "Nos informe qual ajuda está precisando neste momento.",
+      subtitle: '',
+      title: 'Qual ajuda você precisa?',
+      visible: true,
+      actions: []
+    });
   }, [modal]);
 
   const closeModal = useCallback(() => {

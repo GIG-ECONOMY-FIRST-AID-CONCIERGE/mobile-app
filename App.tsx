@@ -1,19 +1,28 @@
 import { StatusBar } from 'expo-status-bar';
-import { Text, View, ImageBackground, StyleSheet } from 'react-native';
+import { useState } from 'react';
+import { Text, View, ImageBackground, StyleSheet, Button } from 'react-native';
 
 // ASSETS
 import background from './assets/background.png';
 
+// COMPONENTS
+import Modal from './components/Modal';
+
 const App = (): JSX.Element => {
+  const [modal, setModal] = useState({
+    visible: false,
+  });
+
   return (
     <View style={styles.container}>
       <ImageBackground source={background} style={styles.image}>
-        <Text>teste 2</Text>
+        <Modal visible={modal.visible} />
+        <div>abrir modal</div>
         <StatusBar style="auto" />
       </ImageBackground>
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {

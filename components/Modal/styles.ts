@@ -34,6 +34,8 @@ const styles = StyleSheet.create({
     color: '#787878'
   },
   actions: {
+    display: 'flex',
+    flexWrap: 'nowrap',
     borderTopWidth: 1,
     borderTopColor: '#D9D9D9'
   },

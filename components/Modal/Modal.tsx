@@ -1,6 +1,8 @@
-/* eslint-disable prettier/prettier */
 import React from 'react';
-import { View, Text, StyleSheet, Modal } from 'react-native';
+import { View, Text, Modal } from 'react-native';
+
+// COMPONENTS
+import { Button } from '../../components/Button';
 
 // STYLES
 import styles from './styles';
@@ -24,7 +26,7 @@ const ModalComponent = ({ visible = false, title, subtitle, count, content, acti
                         <View style={styles.actions}>
                             {actions.map((action: any) => {
                                 return (
-                                    <Text>teste</Text>
+                                    <Button onPress={action.onPress} title={action.label} variant={action.variant} />
                                 )
                             })}
                         </View>

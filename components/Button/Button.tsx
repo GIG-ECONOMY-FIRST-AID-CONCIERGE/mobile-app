@@ -5,11 +5,11 @@ import { Text, Pressable } from 'react-native';
 import styles from './styles';
 
 const Button = (props: any): JSX.Element => {
-  const { onPress, title = 'Save' } = props;
+  const { onPress, title = 'Save', variant = 'primary' } = props;
 
   return (
-    <Pressable style={styles.button} onPress={onPress}>
-      <Text style={styles.text}>{title}</Text>
+    <Pressable style={variant == 'primary' ? styles(variant).buttonPrimary : styles(variant).buttonActions} onPress={onPress}>
+      <Text style={styles(variant).text}>{title}</Text>
     </Pressable>
   );
 };

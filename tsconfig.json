@@ -10,8 +10,21 @@
   },
   "include": [
     "src",
-    "*.tsx",
+    "**/*.ts",
+    "**/*.tsx",
     "custom_types"
   ],
+  "baseUrl": ".",
+  "paths": {
+    "@screens/*": [
+      "screens/*"
+    ],
+    "@assets/*": [
+      "assets/*"
+    ],
+    "@components/*": [
+      "components/*"
+    ],
+  },
   "extends": "expo/tsconfig.base"
 }

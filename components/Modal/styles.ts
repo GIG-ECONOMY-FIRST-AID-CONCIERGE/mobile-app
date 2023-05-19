@@ -26,6 +26,11 @@ const styles = StyleSheet.create({
   },
   modalContent: {
     padding: 28,
+    color: '#252525',
+    fontSize: 17,
+    lineHeight: 20,
+    fontWeight: '500',
+    textAlign: 'left'
   },
   modalTitle: {
     marginBottom: 4,

@@ -20,7 +20,7 @@ const ModalComponent = ({ visible = false, title, subtitle, count, content, acti
                                 <Text style={styles.count}> {count}s.</Text>
                             )}
                         </Text>
-                        <Text>{content}</Text>
+                        <Text style={styles.modalContent}>{content}</Text>
                     </View>
                     {actions && (
                         <View style={styles.actions}>

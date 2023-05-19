@@ -6,17 +6,24 @@ import { View, ImageBackground, StyleSheet } from 'react-native';
 import background from './assets/background.png';
 
 // COMPONENTS
-import Button from './components/Button/Button';
+import { Button } from './components/Button';
 import { Modal } from './components/Modal';
 
 const App = (): JSX.Element => {
   const [modal, setModal] = useState({
+    content: '',
+    count: 10,
+    subtitle: '',
+    title: '',
     visible: false,
   });
 
   const simulateAccident = useCallback(() => {
     setModal({
       ...modal,
+      content: "Notamos algo inesperado em seu percurso, precisa de ajuda?",
+      subtitle: 'Tempo restante',
+      title: 'Está tudo bem com você?',
       visible: true,
     });
   }, [modal]);
@@ -24,7 +31,7 @@ const App = (): JSX.Element => {
   return (
     <View style={styles.container}>
       <ImageBackground source={background} style={styles.image}>
-        <Modal visible={modal.visible} />
+        <Modal {...modal} />
         {!modal.visible && <Button onPress={simulateAccident} title="Simular Acidente" />}
         <StatusBar style="auto" />
       </ImageBackground>

@@ -12,10 +12,9 @@ const styles = StyleSheet.create({
   },
   modalView: {
     width: '90%',
-    height: 100,
+    padding: 28,
     backgroundColor: 'white',
-    borderRadius: 5,
-    alignItems: 'center',
+    borderRadius: 20,
     shadowColor: '#000',
     shadowOffset: {
       width: 0,
@@ -25,14 +24,18 @@ const styles = StyleSheet.create({
     shadowRadius: 3.84,
     elevation: 5,
   },
-  textStyle: {
-    color: 'black',
-    fontWeight: 'bold',
-    textAlign: 'center',
+  modalTitle: {
+    marginBottom: 4,
+    textAlign: 'left',
+    fontSize: 14,
+    fontWeight: '500',
+    color: '#787878'
   },
-  modalText: {
-    marginBottom: 15,
-    textAlign: 'center',
+  modalSubtitle: {
+    fontSize: 12,
+    color: '#787878',
+    textAlign: 'left',
+    marginBottom: 20,
   },
 });
 

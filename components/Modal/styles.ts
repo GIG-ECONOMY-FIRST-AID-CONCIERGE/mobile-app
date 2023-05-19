@@ -12,6 +12,7 @@ const styles = StyleSheet.create({
   },
   modalView: {
     width: '90%',
+    overflow: 'hidden',
     backgroundColor: 'white',
     borderRadius: 20,
     shadowColor: '#000',

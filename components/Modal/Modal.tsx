@@ -24,9 +24,9 @@ const ModalComponent = ({ visible = false, title, subtitle, count, content, acti
                     </View>
                     {actions && (
                         <View style={styles.actions}>
-                            {actions.map((action: any) => {
+                            {actions.map((action: any, idx: number) => {
                                 return (
-                                    <Button onPress={action.onPress} title={action.label} variant={action.variant} />
+                                    <Button key={`button-${idx}`} onPress={action.onPress} title={action.label} variant={action.variant} />
                                 )
                             })}
                         </View>

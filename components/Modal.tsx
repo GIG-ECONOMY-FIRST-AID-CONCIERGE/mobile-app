@@ -2,30 +2,30 @@
 import React from 'react';
 import { View, Text, StyleSheet, Modal } from 'react-native';
 
-const ModalUI = ({ visible = false, title, subtitle, content, actions = [] }: any): JSX.Element => {
-    console.log(title);
-    console.log(subtitle);
-    console.log(content);
-    console.log(actions);
+const ModalUI = ({ visible = false }: any): JSX.Element => {
+    // console.log(title);
+    // console.log(subtitle);
+    // console.log(content);
+    // console.log(actions);
 
     return (
         <Modal animationType="slide" visible={visible} transparent>
             <View style={styles.centeredView}>
                 <View style={styles.modalView}>
-                <Text style={styles.modalText}>Hello World!</Text>
+                  <Text style={styles.modalText}>Hello World!</Text>
 
-                <Text style={styles.textStyle}>Hide Modal</Text>
+                  <Text style={styles.textStyle}>Hide Modal</Text>
 
-                <View
-                    style={{
-                    ...StyleSheet.absoluteFillObject,
-                    backgroundColor: 'red',
-                    width: 100,
-                    height: 100,
-                    top: 50,
-                    zIndex: 55,
-                    }}
-                />
+                  <View
+                      style={{
+                      ...StyleSheet.absoluteFillObject,
+                      backgroundColor: 'red',
+                      width: 100,
+                      height: 100,
+                      top: 50,
+                      zIndex: 55,
+                      }}
+                  />
 
                 </View>
             </View>

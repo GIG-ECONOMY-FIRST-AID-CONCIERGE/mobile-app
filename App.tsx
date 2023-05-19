@@ -1,11 +1,12 @@
 import { StatusBar } from 'expo-status-bar';
-import { useState } from 'react';
-import { Text, View, ImageBackground, StyleSheet, Button } from 'react-native';
+import { useState, useCallback } from 'react';
+import { Text, View, ImageBackground, StyleSheet } from 'react-native';
 
 // ASSETS
 import background from './assets/background.png';
 
 // COMPONENTS
+import Button from './components/Button';
 import Modal from './components/Modal';
 
 const App = (): JSX.Element => {
@@ -13,11 +14,18 @@ const App = (): JSX.Element => {
     visible: false,
   });
 
+  const simulateAccident = useCallback(() => {
+    setModal({
+      ...modal,
+      visible: true,
+    });
+  }, [modal]);
+
   return (
     <View style={styles.container}>
       <ImageBackground source={background} style={styles.image}>
         <Modal visible={modal.visible} />
-        <div>abrir modal</div>
+        <Button onPress={simulateAccident} title="Simular Acidente" />
         <StatusBar style="auto" />
       </ImageBackground>
     </View>

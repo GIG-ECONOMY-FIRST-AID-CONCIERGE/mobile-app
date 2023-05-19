@@ -35,10 +35,14 @@ const styles = StyleSheet.create({
     color: '#787878'
   },
   actions: {
-    display: 'flex',
-    flexWrap: 'nowrap',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
     borderTopWidth: 1,
     borderTopColor: '#D9D9D9'
+  },
+  buttonContainer: {
+    flex: 1,
   },
   modalSubtitle: {
     fontSize: 12,
@@ -46,6 +50,10 @@ const styles = StyleSheet.create({
     textAlign: 'left',
     marginBottom: 20,
   },
+  count: {
+    color: '#1266E3',
+    fontWeight: 'bold'
+  }
 });
 
 export default styles;

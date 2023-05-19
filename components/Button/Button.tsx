@@ -11,10 +11,10 @@ const colors: any = {
 }
 
 const Button = (props: any): JSX.Element => {
-  const { onPress, title = 'Save', variant = 'primary' } = props;
+  const { onPress, title = 'Save', variant = 'primary', hasBorder = false } = props;
 
   return (
-    <Pressable style={variant == 'primary' ? styles.buttonPrimary : styles.buttonActions} onPress={onPress}>
+    <Pressable style={[variant == 'primary' ? styles.buttonPrimary : styles.buttonActions, { borderRightWidth: hasBorder ? 1 : 0, borderRightColor: '#D9D9D9' }]} onPress={onPress}>
       <Text style={[styles.text, { color: colors[variant] }]}>{title}</Text>
     </Pressable>
   );

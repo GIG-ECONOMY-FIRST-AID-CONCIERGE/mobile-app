@@ -1,13 +1,13 @@
 import { StatusBar } from 'expo-status-bar';
 import { useState, useCallback } from 'react';
-import { Text, View, ImageBackground, StyleSheet } from 'react-native';
+import { View, ImageBackground, StyleSheet } from 'react-native';
 
 // ASSETS
 import background from './assets/background.png';
 
 // COMPONENTS
-import Button from './components/Button';
-import Modal from './components/Modal';
+import Button from './components/Button/Button';
+import { Modal } from './components/Modal';
 
 const App = (): JSX.Element => {
   const [modal, setModal] = useState({
@@ -25,7 +25,7 @@ const App = (): JSX.Element => {
     <View style={styles.container}>
       <ImageBackground source={background} style={styles.image}>
         <Modal visible={modal.visible} />
-        <Button onPress={simulateAccident} title="Simular Acidente" />
+        {!modal.visible && <Button onPress={simulateAccident} title="Simular Acidente" />}
         <StatusBar style="auto" />
       </ImageBackground>
     </View>
@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
   image: {
     flex: 1,
     resizeMode: 'cover',
-    justifyContent: 'center',
+    justifyContent: 'flex-end',
   },
   text: {
     color: 'white',

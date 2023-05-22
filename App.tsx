@@ -6,7 +6,6 @@ import { View, ImageBackground, StyleSheet } from 'react-native';
 import background from './assets/background.png';
 
 // COMPONENTS
-import ModalServices from './components/Modal/screens/ModalServices';
 import { Button } from './components/Button';
 import { Modal } from './components/Modal';
 
@@ -14,23 +13,28 @@ const App = (): JSX.Element => {
   const [modal, setModal]: any = useState({
     content: '',
     count: 10,
-    component: null,
+    isDetails: false,
     subtitle: '',
     title: '',
     visible: false,
     actions: []
   });
 
+  const sendClaimsDetails = useCallback((claim: string) => {
+    console.log('sending', claim);
+  }, []);
+
   const openModalDetails = useCallback(() => {
     setModal({
       ...modal,
       count: 0,
-      component: <ModalServices />,
+      isDetails: true,
       content: "Nos informe qual ajuda está precisando neste momento.",
       subtitle: '',
       title: 'Qual ajuda você precisa?',
       visible: true,
-      actions: []
+      actions: [],
+      onSubmit: sendClaimsDetails 
     });
   }, [modal]);
 
@@ -38,7 +42,7 @@ const App = (): JSX.Element => {
     setModal({
       ...modal,
       content: '',
-      component: null,
+      isDetails: false,
       subtitle: '',
       title: '',
       visible: false,
@@ -50,7 +54,7 @@ const App = (): JSX.Element => {
     setModal({
       ...modal,
       content: "Notamos algo inesperado em seu percurso, precisa de ajuda?",
-      component: null,
+      isDetails: false,
       subtitle: 'Tempo restante',
       title: 'Está tudo bem com você?',
       visible: true,

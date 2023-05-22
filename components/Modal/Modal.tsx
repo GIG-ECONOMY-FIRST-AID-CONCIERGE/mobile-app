@@ -7,7 +7,10 @@ import { Button } from '../../components/Button';
 // STYLES
 import styles from './styles';
 
-const ModalComponent = ({ visible = false, title, subtitle, count, content, actions, component }: any): JSX.Element => {
+// MODALS
+import ModalServices from './modals/ModalServices';
+
+const ModalComponent = ({ visible = false, title, subtitle, count, content, actions, isDetails, onSubmit }: any): JSX.Element => {
     return (
         <Modal animationType="slide" visible={visible} transparent>
             <View style={styles.centeredView}>
@@ -21,7 +24,9 @@ const ModalComponent = ({ visible = false, title, subtitle, count, content, acti
                             )}
                         </Text>
                         <Text style={styles.modalInfo}>{content}</Text>
-                        {component && component}
+                        {isDetails && (
+                            <ModalServices onSubmit={onSubmit} />
+                        )}
                     </View>
                     {actions && (
                         <View style={styles.actions}>

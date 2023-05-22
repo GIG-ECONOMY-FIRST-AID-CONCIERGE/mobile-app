@@ -6,6 +6,7 @@ import { View, ImageBackground, StyleSheet } from 'react-native';
 import background from './assets/background.png';
 
 // COMPONENTS
+import ModalServices from './components/Modal/screens/ModalServices';
 import { Button } from './components/Button';
 import { Modal } from './components/Modal';
 
@@ -13,6 +14,7 @@ const App = (): JSX.Element => {
   const [modal, setModal]: any = useState({
     content: '',
     count: 10,
+    component: null,
     subtitle: '',
     title: '',
     visible: false,
@@ -23,6 +25,7 @@ const App = (): JSX.Element => {
     setModal({
       ...modal,
       count: 0,
+      component: <ModalServices />,
       content: "Nos informe qual ajuda está precisando neste momento.",
       subtitle: '',
       title: 'Qual ajuda você precisa?',
@@ -35,6 +38,7 @@ const App = (): JSX.Element => {
     setModal({
       ...modal,
       content: '',
+      component: null,
       subtitle: '',
       title: '',
       visible: false,
@@ -46,6 +50,7 @@ const App = (): JSX.Element => {
     setModal({
       ...modal,
       content: "Notamos algo inesperado em seu percurso, precisa de ajuda?",
+      component: null,
       subtitle: 'Tempo restante',
       title: 'Está tudo bem com você?',
       visible: true,

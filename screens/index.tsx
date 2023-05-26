@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import { View, ImageBackground, StyleSheet } from 'react-native';
 
 // ASSETS
@@ -23,11 +23,12 @@ const HomePage = ({ navigation }: any): JSX.Element => {
     subtitle: '',
     title: '',
     visible: false,
-    actions: []
+    actions: [],
+    repliedNotification: true
   });
 
-  const sendClaimsDetails = useCallback(async (claim: string) => {
-    const details = getAccidentDetails(claim);
+  const sendClaimsDetails = useCallback(async (claim: string, replied: boolean) => {
+    const details = getAccidentDetails(claim, replied);
     const data = await ApiService.sendAccident(details);
 
     if (data) {
@@ -37,7 +38,7 @@ const HomePage = ({ navigation }: any): JSX.Element => {
     }
   }, []);
 
-  const openModalDetails = useCallback(() => {
+  const openModalDetails = useCallback((repliedNotification: boolean) => {
     setModal({
       ...modal,
       count: 0,
@@ -47,7 +48,8 @@ const HomePage = ({ navigation }: any): JSX.Element => {
       title: 'Qual ajuda você precisa?',
       visible: true,
       actions: [],
-      onSubmit: sendClaimsDetails 
+      onSubmit: sendClaimsDetails,
+      repliedNotification
     });
   }, [modal]);
 
@@ -84,6 +86,19 @@ const HomePage = ({ navigation }: any): JSX.Element => {
         },
       ]
     });
+  }, [modal]);
+
+  useEffect(() => {
+    if (modal.visible && !modal.isDetails && modal.count > 0) {
+      const timer = setTimeout(() => setModal({
+        ...modal,
+        count: modal.count - 1
+      }), 1000);
+      return () => clearTimeout(timer);
+    }
+    if (modal.visible && !modal.isDetails && modal.count == 0) {
+      openModalDetails(false);
+    }
   }, [modal]);
 
   return (

@@ -1,7 +1,7 @@
 // MODELS
 import { AccidentModel } from '../libs/axios/model';
 
-export const getAccidentDetails = (helpType: string) => {
+export const getAccidentDetails = (helpType: string, replied: boolean) => {
     let details: AccidentModel = {
         id: 0,
         address: {
@@ -16,7 +16,7 @@ export const getAccidentDetails = (helpType: string) => {
         },
         partnerId: 1,
         assistances: [],
-        repliedNotification: true
+        repliedNotification: replied
     }
 
     if (helpType == 'medicalAssistance') {

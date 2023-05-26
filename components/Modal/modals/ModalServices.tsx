@@ -9,10 +9,10 @@ import completIcon from '../../../assets/complete.png';
 // STYLES
 import styles from './styles';
 
-const ModalServices = ({ onSubmit }: any): JSX.Element => {
+const ModalServices = ({ onSubmit, repliedNotification }: any): JSX.Element => {
     return (
         <View style={styles.container}>
-            <TouchableOpacity onPress={() => onSubmit('medicalAssistance')}  style={styles.serviceCard}>
+            <TouchableOpacity onPress={() => onSubmit('medicalAssistance', repliedNotification)}  style={styles.serviceCard}>
                 <View>
                     <View style={styles.serviceIcon}>
                         <Image source={ambulanceIcon} style={styles.icon} />
@@ -30,7 +30,7 @@ const ModalServices = ({ onSubmit }: any): JSX.Element => {
                     <Text style={styles.serviceSubtitle}>Guincho</Text>
                 </View>  
             </TouchableOpacity>     
-            <TouchableOpacity onPress={() => onSubmit('fullAssistance')}  style={styles.serviceCard}>
+            <TouchableOpacity onPress={() => onSubmit('fullAssistance', repliedNotification)}  style={styles.serviceCard}>
                 <View>
                     <View style={styles.serviceIcon}>
                         <Image source={completIcon} style={styles.iconLarge} />

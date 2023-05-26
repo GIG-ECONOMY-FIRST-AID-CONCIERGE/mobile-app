@@ -10,10 +10,12 @@ import { Button } from '../components/Button';
 import { Modal } from '../components/Modal';
 
 // LIBS
-import { ApiService, AccidentModel } from '../libs/axios';
+import { ApiService } from '../libs/axios';
+
+// SERVICES
+import { getAccidentDetails } from '../services/getAccidentDetails';
 
 const HomePage = ({ navigation }: any): JSX.Element => {
-  // const navigation = useNavigation();
   const [modal, setModal]: any = useState({
     content: '',
     count: 10,
@@ -24,32 +26,9 @@ const HomePage = ({ navigation }: any): JSX.Element => {
     actions: []
   });
 
-  const sendClaimsDetails = useCallback(async (claim: string) => {
-    await ApiService.sendAccident({
-      "id": 0,
-      "address": {
-        "id": 0,
-        "street": "string",
-        "number": "string",
-        "postalCode": "string",
-        "city": "string",
-        "state": "string",
-        "coordX": "string",
-        "coordY": "string"
-      },
-      "partnerId": 0,
-      "assistances": [
-        {
-          "id": 0,
-          "name": "string",
-          "description": "string",
-          "type": 1,
-          "sinisterCircumstances": "string",
-          "status": 1
-        }
-      ],
-      "repliedNotification": true
-    });
+  const sendClaimsDetails = useCallback((claim: string) => {
+    const details = getAccidentDetails(claim);
+    ApiService.sendAccident(details);
     navigation.navigate('Feedback');
   }, []);
 

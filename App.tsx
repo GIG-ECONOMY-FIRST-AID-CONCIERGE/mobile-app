@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import * as Location from 'expo-location';
-import { View, Text } from 'react-native';
+import { View, ImageBackground, StyleSheet } from 'react-native';
+
+// ASSETS
+import background from './assets/background.png';
 
 // COMPONENTS
 import { Navigation } from './components/Navigation';
@@ -35,11 +38,26 @@ const App = (): JSX.Element => {
           <Navigation />
         </AppProvider>
       ) : (
-        <View>
+        <View style={styles.container}>
+          <ImageBackground source={background} style={styles.image} />
         </View>
       )}
     </>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    flexDirection: 'row',
+  },
+  image: {
+    flex: 1,
+    flexDirection: 'row',
+    resizeMode: 'cover',
+    alignItems: 'center',
+    justifyContent: 'center',
+  }
+});
 
 export default App;

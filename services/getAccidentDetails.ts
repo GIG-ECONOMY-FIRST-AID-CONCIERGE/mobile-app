@@ -14,7 +14,7 @@ export const getAccidentDetails = (helpType: string) => {
             coordX: "-22,985224",
             coordY: "47,115949" 
         },
-        partnerId: 0,
+        partnerId: 1,
         assistances: [],
         repliedNotification: true
     }

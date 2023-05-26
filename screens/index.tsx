@@ -26,10 +26,15 @@ const HomePage = ({ navigation }: any): JSX.Element => {
     actions: []
   });
 
-  const sendClaimsDetails = useCallback((claim: string) => {
+  const sendClaimsDetails = useCallback(async (claim: string) => {
     const details = getAccidentDetails(claim);
-    ApiService.sendAccident(details);
-    navigation.navigate('Feedback');
+    const data = await ApiService.sendAccident(details);
+
+    if (data) {
+      navigation.navigate('Feedback');
+    } else {
+      navigation.navigate('Error');
+    }
   }, []);
 
   const openModalDetails = useCallback(() => {

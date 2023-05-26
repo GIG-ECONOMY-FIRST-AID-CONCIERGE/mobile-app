@@ -2,13 +2,13 @@ import http from './http';
 import { AccidentModel } from './model';
 
 class ApiService {
-  sendAccident(data: AccidentModel) {
+  async sendAccident(data: AccidentModel) {
     console.log(data);
 
     return http.post<AccidentModel>('/Accident', data).then((response) => {
-      console.log('response', response);
-    }).catch((err) => {
-      console.log('err', err);
+      return { data: response.data };
+    }).catch(() => {
+      return { data: null, error: true }
     });
   }
 }

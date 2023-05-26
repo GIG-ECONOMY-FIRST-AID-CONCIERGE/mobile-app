@@ -28,7 +28,7 @@ const HomePage = ({ navigation, location }: any): JSX.Element => {
   });
 
   const sendClaimsDetails = useCallback(async (claim: string, replied: boolean) => {
-    const details = getAccidentDetails(claim, replied, location);
+    const details = getAccidentDetails(claim, replied, location.coords);
     const data = await ApiService.sendAccident(details);
 
     if (data) {
@@ -51,7 +51,7 @@ const HomePage = ({ navigation, location }: any): JSX.Element => {
       onSubmit: sendClaimsDetails,
       repliedNotification
     });
-  }, [modal]);
+  }, [modal, location]);
 
   const closeModal = useCallback(() => {
     setModal({
@@ -86,7 +86,7 @@ const HomePage = ({ navigation, location }: any): JSX.Element => {
         },
       ]
     });
-  }, [modal]);
+  }, [modal, location]);
 
   useEffect(() => {
     if (modal.visible && !modal.isDetails && modal.count > 0) {

@@ -1,10 +1,12 @@
 // INTERFACES
-import { ILocation } from '../interfaces/location.interface';
+import { ICoord } from '../interfaces/location.interface';
 
 // MODELS
 import { AccidentModel } from '../libs/axios/model';
 
-export const getAccidentDetails = (helpType: string, replied: boolean, location: ILocation) => {
+export const getAccidentDetails = (helpType: string, replied: boolean, coords: ICoord) => {
+    console.log(coords, 'coords');
+    
     let details: AccidentModel = {
         id: 0,
         address: {
@@ -14,8 +16,8 @@ export const getAccidentDetails = (helpType: string, replied: boolean, location:
             postalCode: "04571-010",
             city: "São Paulo",
             state: "SP",
-            coordX: location.coords.latitude.toString(),
-            coordY: location.coords.longitude.toString()
+            coordX: coords.latitude.toString() ?? '',
+            coordY: coords.longitude.toString() ?? ''
         },
         partnerId: 1,
         assistances: [],

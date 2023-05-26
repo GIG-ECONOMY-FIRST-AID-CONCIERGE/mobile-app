@@ -1,6 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
 import { useState, useCallback, useEffect } from 'react';
 import { View, ImageBackground, StyleSheet } from 'react-native';
+import { Accelerometer } from 'expo-sensors';
 
 // CONTEXT
 import { useAppContext } from '../context/AppContext'
@@ -21,6 +22,7 @@ import { getAddressDetails } from '../services/getAddressDetails';
 
 const HomePage = ({ navigation }: any): JSX.Element => {
   const { location } = useAppContext();
+  const [hasFallen, setHasFallen] = useState(false);
   
   const [modal, setModal]: any = useState({
     content: '',
@@ -41,7 +43,7 @@ const HomePage = ({ navigation }: any): JSX.Element => {
 
     console.log(details);
     console.log(data);
-    
+
     if (!data.error) {
       navigation.navigate('Feedback');
     } else {
@@ -75,6 +77,15 @@ const HomePage = ({ navigation }: any): JSX.Element => {
     });
   }, []);
 
+  const handleAcceleration = ({ x, y, z }: any) => {
+    const acceleration = Math.sqrt(x * x + y * y + z * z);
+    const threshold = 12; 
+
+    if (acceleration > threshold) {
+      setHasFallen(true);
+    }
+  };
+
   const simulateAccident = useCallback(() => {
     setModal({
       ...modal,
@@ -99,6 +110,12 @@ const HomePage = ({ navigation }: any): JSX.Element => {
   }, [modal]);
 
   useEffect(() => {
+    if (hasFallen && !modal.visible) {
+      simulateAccident();
+    }
+  }, [hasFallen]);
+
+  useEffect(() => {
     if (modal.visible && !modal.isDetails && modal.count > 0) {
       const timer = setTimeout(() => setModal({
         ...modal,
@@ -114,6 +131,14 @@ const HomePage = ({ navigation }: any): JSX.Element => {
       openModalDetails();
     }
   }, [modal]);
+
+  useEffect(() => {
+    Accelerometer.addListener(handleAcceleration);
+
+    return () => {
+      Accelerometer.removeAllListeners();
+    };
+  }, []);
 
   return (
     <View style={styles.container}>

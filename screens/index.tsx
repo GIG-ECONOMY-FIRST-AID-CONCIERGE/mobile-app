@@ -15,7 +15,7 @@ import { ApiService } from '../libs/axios';
 // SERVICES
 import { getAccidentDetails } from '../services/getAccidentDetails';
 
-const HomePage = ({ navigation }: any): JSX.Element => {
+const HomePage = ({ navigation, location }: any): JSX.Element => {
   const [modal, setModal]: any = useState({
     content: '',
     count: 10,
@@ -28,7 +28,7 @@ const HomePage = ({ navigation }: any): JSX.Element => {
   });
 
   const sendClaimsDetails = useCallback(async (claim: string, replied: boolean) => {
-    const details = getAccidentDetails(claim, replied);
+    const details = getAccidentDetails(claim, replied, location);
     const data = await ApiService.sendAccident(details);
 
     if (data) {
@@ -36,7 +36,7 @@ const HomePage = ({ navigation }: any): JSX.Element => {
     } else {
       navigation.navigate('Error');
     }
-  }, []);
+  }, [location]);
 
   const openModalDetails = useCallback((repliedNotification: boolean) => {
     setModal({

@@ -1,18 +1,21 @@
+// INTERFACES
+import { ILocation } from '../interfaces/location.interface';
+
 // MODELS
 import { AccidentModel } from '../libs/axios/model';
 
-export const getAccidentDetails = (helpType: string, replied: boolean) => {
+export const getAccidentDetails = (helpType: string, replied: boolean, location: ILocation) => {
     let details: AccidentModel = {
         id: 0,
         address: {
             id: 0,
             street: "Av. Engenheiro Luís Carlos Berrini",
-            number: "1253 ",
+            number: "1253",
             postalCode: "04571-010",
             city: "São Paulo",
             state: "SP",
-            coordX: "-22,985224",
-            coordY: "47,115949" 
+            coordX: location.coords.latitude.toString(),
+            coordY: location.coords.longitude.toString()
         },
         partnerId: 1,
         assistances: [],
@@ -36,7 +39,7 @@ export const getAccidentDetails = (helpType: string, replied: boolean) => {
                 id: 0,
                 name: "Guincho",
                 description: "Solicitado guincho",
-                type: 1,
+                type: 2,
                 sinisterCircumstances: "Acidente envolvendo carro, moto precisa ser levada até a residência do acidentado",
                 status: 2
             }
@@ -55,7 +58,7 @@ export const getAccidentDetails = (helpType: string, replied: boolean) => {
                 id: 1,
                 name: "Guincho",
                 description: "Solicitado guincho",
-                type: 1,
+                type: 2,
                 sinisterCircumstances: "Acidente envolvendo carro, moto precisa ser levada até a residência do acidentado",
                 status: 2
             }

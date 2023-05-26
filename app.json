@@ -11,6 +11,14 @@
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
+    "plugins": [
+      [
+        "expo-location",
+        {
+          "locationAlwaysAndWhenInUsePermission": "Permite $(PRODUCT_NAME) usar sua localização?"
+        }
+      ]
+    ],
     "assetBundlePatterns": [
       "**/*"
     ],

@@ -3,7 +3,7 @@ import * as Location from 'expo-location';
 import { View, ImageBackground, StyleSheet } from 'react-native';
 
 // ASSETS
-import background from './assets/background.png';
+import background from './assets/bgfeedback.png';
 
 // COMPONENTS
 import { Navigation } from './components/Navigation';

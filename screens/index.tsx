@@ -9,6 +9,9 @@ import background from '../assets/background.png';
 import { Button } from '../components/Button';
 import { Modal } from '../components/Modal';
 
+// LIBS
+import { ApiService, AccidentModel } from '../libs/axios';
+
 const HomePage = ({ navigation }: any): JSX.Element => {
   // const navigation = useNavigation();
   const [modal, setModal]: any = useState({
@@ -21,8 +24,32 @@ const HomePage = ({ navigation }: any): JSX.Element => {
     actions: []
   });
 
-  const sendClaimsDetails = useCallback((claim: string) => {
-    console.log('sending', claim);
+  const sendClaimsDetails = useCallback(async (claim: string) => {
+    await ApiService.sendAccident({
+      "id": 0,
+      "address": {
+        "id": 0,
+        "street": "string",
+        "number": "string",
+        "postalCode": "string",
+        "city": "string",
+        "state": "string",
+        "coordX": "string",
+        "coordY": "string"
+      },
+      "partnerId": 0,
+      "assistances": [
+        {
+          "id": 0,
+          "name": "string",
+          "description": "string",
+          "type": 1,
+          "sinisterCircumstances": "string",
+          "status": 1
+        }
+      ],
+      "repliedNotification": true
+    });
     navigation.navigate('Feedback');
   }, []);
 

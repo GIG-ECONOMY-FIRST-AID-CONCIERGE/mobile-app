@@ -3,6 +3,7 @@ import { useState, useCallback, useEffect } from 'react';
 import { View, ImageBackground, StyleSheet } from 'react-native';
 import { Accelerometer } from 'expo-sensors';
 import Spinner from 'react-native-loading-spinner-overlay';
+import MapView from 'react-native-maps';
 
 // CONTEXT
 import { useAppContext } from '../context/AppContext'
@@ -148,11 +149,20 @@ const HomePage = ({ navigation }: any): JSX.Element => {
           textContent={'Solicitando ajuda...'}
           textStyle={styles.spinnerTextStyle}
       />
-      <ImageBackground source={background} style={styles.image}>
+      <MapView 
+        style={styles.map} 
+        initialRegion={{ 
+          latitude: location.coords.latitude, 
+          longitude: location.coords.longitude,
+          latitudeDelta: 0.0922,
+          longitudeDelta: 0.0421
+        }} 
+      />
+      <View style={styles.overlayContent}>
         <Modal {...modal} />
         {!modal.visible && <Button onPress={simulateAccident} title="Simular Acidente" />}
         <StatusBar style="auto" />
-      </ImageBackground>
+      </View>
     </View>
   );
 };
@@ -161,6 +171,16 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: 'column',
+  },
+  overlayContent: {
+    left: 0,
+    right: 0,
+    bottom: 0,
+    position: "absolute"
+  },
+  map: {
+    width: '100%',
+    height: '100%',
   },
   spinnerTextStyle: {
     color: '#FFF'

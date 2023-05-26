@@ -3,6 +3,8 @@ import { AccidentModel } from './model';
 
 class ApiService {
   sendAccident(data: AccidentModel) {
+    console.log(data);
+
     return http.post<AccidentModel>('/Accident', data).then((response) => {
       console.log('response', response);
     }).catch((err) => {

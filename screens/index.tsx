@@ -2,6 +2,9 @@ import { StatusBar } from 'expo-status-bar';
 import { useState, useCallback, useEffect } from 'react';
 import { View, ImageBackground, StyleSheet } from 'react-native';
 
+// CONTEXT
+import { useAppContext } from '../context/AppContext'
+
 // ASSETS
 import background from '../assets/background.png';
 
@@ -14,8 +17,11 @@ import { ApiService } from '../libs/axios';
 
 // SERVICES
 import { getAccidentDetails } from '../services/getAccidentDetails';
+import { getAddressDetails } from '../services/getAddressDetails';
 
-const HomePage = ({ navigation, location }: any): JSX.Element => {
+const HomePage = ({ navigation }: any): JSX.Element => {
+  const { location } = useAppContext();
+  
   const [modal, setModal]: any = useState({
     content: '',
     count: 10,
@@ -27,18 +33,22 @@ const HomePage = ({ navigation, location }: any): JSX.Element => {
     repliedNotification: true
   });
 
-  const sendClaimsDetails = useCallback(async (claim: string, replied: boolean) => {
-    const details = getAccidentDetails(claim, replied, location.coords);
-    const data = await ApiService.sendAccident(details);
+  const sendClaimsDetails = useCallback(async (claim: string) => {
+    const { coords } = location;
+    const address = await getAddressDetails(coords.latitude, coords.longitude);
+    const details = getAccidentDetails(claim, modal.repliedNotification, address);
+    const data: any = await ApiService.sendAccident(details);
 
-    if (data) {
+    console.log(details);
+
+    if (!data.error) {
       navigation.navigate('Feedback');
     } else {
       navigation.navigate('Error');
     }
-  }, [location]);
+  }, [modal]);
 
-  const openModalDetails = useCallback((repliedNotification: boolean) => {
+  const openModalDetails = useCallback(() => {
     setModal({
       ...modal,
       count: 0,
@@ -48,10 +58,9 @@ const HomePage = ({ navigation, location }: any): JSX.Element => {
       title: 'Qual ajuda você precisa?',
       visible: true,
       actions: [],
-      onSubmit: sendClaimsDetails,
-      repliedNotification
+      onSubmit: sendClaimsDetails
     });
-  }, [modal, location]);
+  }, [modal]);
 
   const closeModal = useCallback(() => {
     setModal({
@@ -86,7 +95,7 @@ const HomePage = ({ navigation, location }: any): JSX.Element => {
         },
       ]
     });
-  }, [modal, location]);
+  }, [modal]);
 
   useEffect(() => {
     if (modal.visible && !modal.isDetails && modal.count > 0) {
@@ -97,7 +106,11 @@ const HomePage = ({ navigation, location }: any): JSX.Element => {
       return () => clearTimeout(timer);
     }
     if (modal.visible && !modal.isDetails && modal.count == 0) {
-      openModalDetails(false);
+      setModal({
+        ...modal,
+        repliedNotification: false
+      })
+      openModalDetails();
     }
   }, [modal]);
 

@@ -1,32 +1,44 @@
 import React, { useEffect, useState } from 'react';
 import * as Location from 'expo-location';
+import { View, Text } from 'react-native';
 
 // COMPONENTS
 import { Navigation } from './components/Navigation';
+
+// CONTEXT
+import AppProvider from './context/AppContext';
 
 // INTERFACES
 import { ILocation } from './interfaces/location.interface';
 
 const App = (): JSX.Element => {
-  const [location, setLocation] = useState<ILocation|Object>({});
-  const [errorMsg, setErrorMsg] = useState('');
+  const [location, setLocation] = useState<ILocation|null|Object>(null);
 
   useEffect(() => {
     (async () => {
       const { status } = await Location.requestForegroundPermissionsAsync();
+      let location = null;
+
       if (status !== 'granted') {
-        setErrorMsg('Permission to access location was denied');
         return;
       }
 
-      const location = await Location.getCurrentPositionAsync({});
-      
+      location = await Location.getCurrentPositionAsync({});
       setLocation(location);
     })();
   }, []);
   
   return (
-    <Navigation location={location} />
+    <>
+      {location !== null ? (
+        <AppProvider location={location}>
+          <Navigation />
+        </AppProvider>
+      ) : (
+        <View>
+        </View>
+      )}
+    </>
   );
 };
 

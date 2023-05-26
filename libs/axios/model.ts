@@ -1,5 +1,4 @@
 export interface AddressModel {
-    id: number,
     street: string;
     number: string;
     postalCode: string;
@@ -22,6 +21,7 @@ export interface PartnerModel {
 export interface AssistanceModel {
     id: number;
     name: string;
+    partnerId: number;
     description: string;
     type: number;
     sinisterCircumstances: string;
@@ -29,7 +29,6 @@ export interface AssistanceModel {
 };
 
 export interface AccidentModel {
-    id: number;
     address: AddressModel;
     partnerId: number;
     assistances: AssistanceModel[];

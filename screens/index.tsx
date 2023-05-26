@@ -2,6 +2,7 @@ import { StatusBar } from 'expo-status-bar';
 import { useState, useCallback, useEffect } from 'react';
 import { View, ImageBackground, StyleSheet } from 'react-native';
 import { Accelerometer } from 'expo-sensors';
+import Spinner from 'react-native-loading-spinner-overlay';
 
 // CONTEXT
 import { useAppContext } from '../context/AppContext'
@@ -23,6 +24,7 @@ import { getAddressDetails } from '../services/getAddressDetails';
 const HomePage = ({ navigation }: any): JSX.Element => {
   const { location } = useAppContext();
   const [hasFallen, setHasFallen] = useState(false);
+  const [loading, setLoading] = useState(false);
   
   const [modal, setModal]: any = useState({
     content: '',
@@ -37,12 +39,11 @@ const HomePage = ({ navigation }: any): JSX.Element => {
 
   const sendClaimsDetails = useCallback(async (claim: string) => {
     const { coords } = location;
+    setLoading(true);
     const address = await getAddressDetails(coords.latitude, coords.longitude);
     const details = getAccidentDetails(claim, modal.repliedNotification, address);
     const data: any = await ApiService.sendAccident(details);
-
-    console.log(details);
-    console.log(data);
+    setLoading(false);
 
     if (!data.error) {
       navigation.navigate('Feedback');
@@ -142,6 +143,11 @@ const HomePage = ({ navigation }: any): JSX.Element => {
 
   return (
     <View style={styles.container}>
+      <Spinner
+          visible={loading}
+          textContent={'Solicitando ajuda...'}
+          textStyle={styles.spinnerTextStyle}
+      />
       <ImageBackground source={background} style={styles.image}>
         <Modal {...modal} />
         {!modal.visible && <Button onPress={simulateAccident} title="Simular Acidente" />}
@@ -155,6 +161,9 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: 'column',
+  },
+  spinnerTextStyle: {
+    color: '#FFF'
   },
   image: {
     flex: 1,

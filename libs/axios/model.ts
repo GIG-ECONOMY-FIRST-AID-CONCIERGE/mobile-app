@@ -32,5 +32,6 @@ export interface AccidentModel {
     address: AddressModel;
     partnerId: number;
     assistances: AssistanceModel[];
+    description: string;
     repliedNotification: boolean;
 };

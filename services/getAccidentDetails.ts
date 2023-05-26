@@ -19,6 +19,7 @@ export const getAccidentDetails = (helpType: string, replied: boolean, address: 
         },
         partnerId: 1,
         assistances: [],
+        description: "",
         repliedNotification: replied
     }
 

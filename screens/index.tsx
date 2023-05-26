@@ -40,7 +40,8 @@ const HomePage = ({ navigation }: any): JSX.Element => {
     const data: any = await ApiService.sendAccident(details);
 
     console.log(details);
-
+    console.log(data);
+    
     if (!data.error) {
       navigation.navigate('Feedback');
     } else {

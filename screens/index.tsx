@@ -22,6 +22,8 @@ import { ApiService } from '../libs/axios';
 import { getAccidentDetails } from '../services/getAccidentDetails';
 import { getAddressDetails } from '../services/getAddressDetails';
 
+import successIcon from '../assets/success.png';
+
 const HomePage = ({ navigation }: any): JSX.Element => {
   const { location } = useAppContext();
   const [hasFallen, setHasFallen] = useState(false);
@@ -149,20 +151,13 @@ const HomePage = ({ navigation }: any): JSX.Element => {
           textContent={'Solicitando ajuda...'}
           textStyle={styles.spinnerTextStyle}
       />
-      <MapView 
-        style={styles.map} 
-        initialRegion={{ 
-          latitude: location.coords.latitude, 
-          longitude: location.coords.longitude,
-          latitudeDelta: 0.0922,
-          longitudeDelta: 0.0421
-        }} 
-      />
-      <View style={styles.overlayContent}>
-        <Modal {...modal} />
-        {!modal.visible && <Button onPress={simulateAccident} title="Simular Acidente" />}
-        <StatusBar style="auto" />
-      </View>
+      <ImageBackground source={background} style={styles.image}>
+        <View>
+          <Modal {...modal} />
+          {!modal.visible && <Button onPress={simulateAccident} title="Simular Acidente" />}
+          <StatusBar style="auto" />
+        </View>
+      </ImageBackground>
     </View>
   );
 };
@@ -171,16 +166,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: 'column',
-  },
-  overlayContent: {
-    left: 0,
-    right: 0,
-    bottom: 0,
-    position: "absolute"
-  },
-  map: {
-    width: '100%',
-    height: '100%',
   },
   spinnerTextStyle: {
     color: '#FFF'
